@@ -1,11 +1,11 @@
 import React from "react";
 
 import PhotoListItem from "./PhotoListItem";
-import photos from "mocks/photos";
+
 import "../styles/PhotoList.scss";
 
 const PhotoList = (props) => {
-
+  const photos = props.photos;
   const allPhotos = photos.map((photo) => {
     return (
       <PhotoListItem
@@ -14,8 +14,8 @@ const PhotoList = (props) => {
         location={photo.location}
         urls={photo.urls}
         user={photo.user}
-        addLiked={props.addLiked}
-        switchModal={props.switchModal}
+        useLiked={props.useLiked}
+        useModal={props.useModal}
       />
     );
   });

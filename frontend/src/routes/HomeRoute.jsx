@@ -1,19 +1,17 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
+import photos from "mocks/photos";
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ switchModal }) => {
-  const [likedList, setLikedList] = useState([]);
-  const addLiked = useCallback((id) => {
-    setLikedList((liked) => (likedList.includes(id)) ? likedList.filter(likedId => id !== likedId) : [...liked, id]);
-  }, [likedList]);
-  const hasLikedItem = (likedList.length) ? true : false;
+const HomeRoute = (props) => {
+
+  const { hasLikedItem, useModal, useLiked } = props;
   return (
     <div className="home-route">
       <TopNavigation displayAlert={hasLikedItem} />
-      <PhotoList addLiked={addLiked} switchModal={switchModal} />
+      <PhotoList useLiked={useLiked} useModal={useModal} photos={photos} />
     </div>
   );
 };

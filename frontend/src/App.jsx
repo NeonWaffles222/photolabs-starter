@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 //import PhotoListItem from './components/PhotoListItem';
 //import TopicListItem from 'components/TopicListItem';
@@ -8,19 +8,24 @@ import React, { useState } from 'react';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import './App.scss';
+import useApplicationData from 'hooks/useApplicationData';
 
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [modal, setModal] = useState(false);
-  const switchModal = () => {
-    console.log('img clicked');
-    setModal((modal) ? false : true);
-  };
+
+  const {
+    state,
+    useModal,
+    useLiked
+  } = useApplicationData();
+
+  const hasLikedItem = (state.likedList.length) ? true : false;
+
   return (
     <div className="App">
-      <HomeRoute switchModal={switchModal} />
-      {modal === true && <PhotoDetailsModal />}
+      <HomeRoute useModal={useModal} useLiked={useLiked} hasLikedItem={hasLikedItem} />
+      {state.modal.isOpen === true && <PhotoDetailsModal useModal={useModal} id={state.modal.photoId} useLiked={useLiked} />}
     </div>
   );
 };
