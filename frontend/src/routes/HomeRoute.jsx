@@ -6,12 +6,12 @@ import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
 
-  const { hasLikedItem, onPhotoSelect, updateToFavPhotoIds, photos, topics, onTopicSelect } = props;
+  const { hasLikedItem, onPhotoSelect, updateToFavPhotoIds, photos, topics, onTopicSelect, likedList, onViewFavPhotos } = props;
 
   return (
     <div className="home-route">
-      <TopNavigation displayAlert={hasLikedItem} topics={topics} onTopicSelect={onTopicSelect} />
-      <PhotoList updateToFavPhotoIds={updateToFavPhotoIds} onPhotoSelect={onPhotoSelect} photos={photos} />
+      <TopNavigation displayAlert={hasLikedItem} topics={topics} onTopicSelect={onTopicSelect} onViewFavPhotos={onViewFavPhotos} />
+      <PhotoList updateToFavPhotoIds={updateToFavPhotoIds} onPhotoSelect={onPhotoSelect} photos={photos} likedList={likedList} />
     </div>
   );
 };

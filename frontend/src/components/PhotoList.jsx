@@ -16,6 +16,7 @@ const PhotoList = (props) => {
         user={photo.user}
         updateToFavPhotoIds={props.updateToFavPhotoIds}
         onPhotoSelect={props.onPhotoSelect}
+        likedList={props.likedList}
       />
     );
   });

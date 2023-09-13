@@ -10,7 +10,7 @@ const PhotoListItem = (props) => {
   const onPhotoSelect = props.onPhotoSelect;
   return (
     <li className="photo-list__item">
-      <PhotoFavButton id={props.id} updateToFavPhotoIds={props.updateToFavPhotoIds} />
+      <PhotoFavButton id={props.id} updateToFavPhotoIds={props.updateToFavPhotoIds} likedList={props.likedList} />
       <img className="photo-list__image" src={regular} onClick={() => onPhotoSelect(props.id)} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={profile} />

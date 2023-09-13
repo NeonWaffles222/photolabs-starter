@@ -13,7 +13,8 @@ const App = () => {
     state,
     onPhotoSelect,
     updateToFavPhotoIds,
-    onTopicSelect
+    onTopicSelect,
+    onViewFavPhotos
   } = useApplicationData();
 
   // If likedList is not empty the alert in the header will display.
@@ -26,15 +27,18 @@ const App = () => {
         onPhotoSelect={onPhotoSelect}
         updateToFavPhotoIds={updateToFavPhotoIds}
         hasLikedItem={hasLikedItem}
+        likedList={state.likedList}
         photos={state.photos}
         topics={state.topics}
-        onTopicSelect={onTopicSelect} />
+        onTopicSelect={onTopicSelect}
+        onViewFavPhotos={onViewFavPhotos} />
 
       {state.modal.isOpen === true && <PhotoDetailsModal
         onPhotoSelect={onPhotoSelect}
         id={state.modal.photoId}
         updateToFavPhotoIds={updateToFavPhotoIds}
-        photos={state.photos} />}
+        photos={state.photos}
+        likedList={state.likedList} />}
 
     </div>
   );

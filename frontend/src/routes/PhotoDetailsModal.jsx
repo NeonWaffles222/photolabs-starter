@@ -5,7 +5,7 @@ import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 import closeSymbol from '../assets/closeSymbol.svg';
 
-const PhotoDetailsModal = ({ onPhotoSelect, id, updateToFavPhotoIds, photos }) => {
+const PhotoDetailsModal = ({ onPhotoSelect, id, updateToFavPhotoIds, photos, likedList }) => {
 
   // Gets the photo that was clicked on
   const filteredPhoto = photos.filter(photo => photo.id === id);
@@ -20,7 +20,7 @@ const PhotoDetailsModal = ({ onPhotoSelect, id, updateToFavPhotoIds, photos }) =
         <img src={closeSymbol} alt="close symbol" onClick={onPhotoSelect} />
       </button>
       <div className='photo-details-modal__images'>
-        <PhotoFavButton id={photo.id} updateToFavPhotoIds={updateToFavPhotoIds} />
+        <PhotoFavButton id={photo.id} updateToFavPhotoIds={updateToFavPhotoIds} likedList={likedList} />
         <img src={photo.urls.regular} className='photo-details-modal__image' />
         <div className="photo-details-modal__photographer-details">
           <img className="photo-list__user-profile" src={photo.user.profile} />
@@ -32,7 +32,7 @@ const PhotoDetailsModal = ({ onPhotoSelect, id, updateToFavPhotoIds, photos }) =
         <div className='photo-details-modal__header'>Similar Photos</div>
       </div>
       <div className='photo-details-modal__top-bar'>
-        <PhotoList photos={similarPhotos} updateToFavPhotoIds={updateToFavPhotoIds} />
+        <PhotoList photos={similarPhotos} updateToFavPhotoIds={updateToFavPhotoIds} likedList={likedList} />
       </div>
     </div>
   );

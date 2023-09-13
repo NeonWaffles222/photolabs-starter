@@ -1,3 +1,4 @@
+
 import { useReducer, useEffect } from 'react';
 
 function useApplicationData() {
@@ -6,6 +7,10 @@ function useApplicationData() {
     modal: {
       isOpen: false,
       photoId: null
+    },
+    viewFav: {
+      isOpen: false,
+      saveList: []
     },
     likedList: [],
     photos: [],
@@ -37,6 +42,12 @@ function useApplicationData() {
     (state.topicId === topic) ?
       dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, value: null }) :
       dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, value: topic });
+  };
+
+  const onViewFavPhotos = () => {
+    (state.viewFav.isOpen) ?
+      dispatch({ type: ACTIONS.HIDE_FAV_PHOTOS, value: false }) :
+      dispatch({ type: ACTIONS.VIEW_FAV_PHOTOS, value: true });
   };
 
   // Gets all photos from the server.
@@ -86,7 +97,8 @@ function useApplicationData() {
     state,
     onPhotoSelect,
     updateToFavPhotoIds,
-    onTopicSelect
+    onTopicSelect,
+    onViewFavPhotos
   };
 };
 
@@ -96,7 +108,9 @@ export const ACTIONS = {
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
-  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
+  VIEW_FAV_PHOTOS: 'VIEW_FAV_PHOTOS',
+  HIDE_FAV_PHOTOS: 'HIDE_FAV_PHOTOS'
 };
 
 function reducer(state, action) {
@@ -136,6 +150,29 @@ function reducer(state, action) {
         ...state,
         topicId: action.value
       };
+
+    case ACTIONS.VIEW_FAV_PHOTOS:
+      const favPhotos = state.photos.filter((photo) => state.likedList.includes(photo.id));
+      return {
+        ...state,
+        viewFav: {
+          isOpen: action.value,
+          saveList: state.photos
+        },
+        photos: favPhotos
+      };
+
+    case ACTIONS.HIDE_FAV_PHOTOS:
+
+      return {
+        ...state,
+        viewFav: {
+          isOpen: action.value,
+          saveList: []
+        },
+        photos: state.viewFav.saveList
+      };
+
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
