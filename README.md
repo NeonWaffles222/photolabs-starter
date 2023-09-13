@@ -22,3 +22,8 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+## ScreenShots
+
+!["The home page when the app is loaded."](https://github.com/NeonWaffles222/photolabs-starter/blob/main/docs/photo-main.png)
+!["The view when an image is selected."](https://github.com/NeonWaffles222/photolabs-starter/blob/main/docs/photo-modal.png)
+!["The home page with liked photos"](https://github.com/NeonWaffles222/photolabs-starter/blob/main/docs/photo-liked.png)
