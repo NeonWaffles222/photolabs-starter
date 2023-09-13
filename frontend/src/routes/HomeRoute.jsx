@@ -2,16 +2,16 @@ import React from 'react';
 
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
-import photos from "mocks/photos";
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
 
-  const { hasLikedItem, useModal, useLiked } = props;
+  const { hasLikedItem, onPhotoSelect, updateToFavPhotoIds, photos, topics, onTopicSelect } = props;
+
   return (
     <div className="home-route">
-      <TopNavigation displayAlert={hasLikedItem} />
-      <PhotoList useLiked={useLiked} useModal={useModal} photos={photos} />
+      <TopNavigation displayAlert={hasLikedItem} topics={topics} onTopicSelect={onTopicSelect} />
+      <PhotoList updateToFavPhotoIds={updateToFavPhotoIds} onPhotoSelect={onPhotoSelect} photos={photos} />
     </div>
   );
 };

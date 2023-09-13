@@ -14,8 +14,8 @@ const PhotoList = (props) => {
         location={photo.location}
         urls={photo.urls}
         user={photo.user}
-        useLiked={props.useLiked}
-        useModal={props.useModal}
+        updateToFavPhotoIds={props.updateToFavPhotoIds}
+        onPhotoSelect={props.onPhotoSelect}
       />
     );
   });

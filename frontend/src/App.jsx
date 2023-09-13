@@ -1,31 +1,41 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 
-//import PhotoListItem from './components/PhotoListItem';
-//import TopicListItem from 'components/TopicListItem';
-//import TopicList from 'components/TopicList';
-// import TopNavigation from 'components/TopNavigationBar';
-// import PhotoList from 'components/PhotoList';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import './App.scss';
 import useApplicationData from 'hooks/useApplicationData';
 
 
-// Note: Rendering a single component to build components in isolation
+
 const App = () => {
 
   const {
     state,
-    useModal,
-    useLiked
+    onPhotoSelect,
+    updateToFavPhotoIds,
+    onTopicSelect
   } = useApplicationData();
 
+  // If likedList is not empty the alert in the header will display.
   const hasLikedItem = (state.likedList.length) ? true : false;
 
   return (
     <div className="App">
-      <HomeRoute useModal={useModal} useLiked={useLiked} hasLikedItem={hasLikedItem} />
-      {state.modal.isOpen === true && <PhotoDetailsModal useModal={useModal} id={state.modal.photoId} useLiked={useLiked} />}
+
+      <HomeRoute
+        onPhotoSelect={onPhotoSelect}
+        updateToFavPhotoIds={updateToFavPhotoIds}
+        hasLikedItem={hasLikedItem}
+        photos={state.photos}
+        topics={state.topics}
+        onTopicSelect={onTopicSelect} />
+
+      {state.modal.isOpen === true && <PhotoDetailsModal
+        onPhotoSelect={onPhotoSelect}
+        id={state.modal.photoId}
+        updateToFavPhotoIds={updateToFavPhotoIds}
+        photos={state.photos} />}
+
     </div>
   );
 };
